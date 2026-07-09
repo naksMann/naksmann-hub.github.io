@@ -107,6 +107,14 @@
       <g stroke="#e8c766" stroke-width="1.5" opacity=".7"><path class="bgflow" d="M-20 46 H140"/><path class="bgflow" d="M260 256 H420" style="animation-delay:1s"/></g>
       <rect class="bgpulse" x="150" y="248" width="10" height="16" fill="#c68a4e"/></svg>`,
   };
+  /* Higgsfield-generated backgrounds (5 tiles); Development keeps its SVG motif. */
+  const SKILL_IMG = {
+    "SOC Operations": "assets/img/skills/soc.webp",
+    "Cloud & Automation": "assets/img/skills/cloud.webp",
+    "Penetration Testing": "assets/img/skills/pentest.webp",
+    "Machine Learning for Security": "assets/img/skills/ml.webp",
+    "ICS / OT Security": "assets/img/skills/ics.webp",
+  };
   const BENTO = [
     { group: "SOC Operations", span: "btile--xl", accent: "var(--c-soc)",
       snippet: ['<span class="kw">SecurityEvent</span>', '| where EventID == <span class="num">4625</span>', '| summarize c=count() by Account'] },
@@ -121,7 +129,9 @@
     $("#skillsGrid").innerHTML = BENTO.map((cfg, i) => {
       const g = byName[cfg.group]; if (!g) return "";
       const snip = cfg.snippet ? `<div class="btile__snip">${cfg.snippet.join("\n")}</div>` : "";
-      const bg = SKILL_BG[cfg.group] ? `<div class="btile__bg">${SKILL_BG[cfg.group]}</div>` : "";
+      const bg = SKILL_IMG[cfg.group]
+        ? `<div class="btile__bg btile__bg--img"><img src="${SKILL_IMG[cfg.group]}" alt="" loading="lazy"></div>`
+        : (SKILL_BG[cfg.group] ? `<div class="btile__bg">${SKILL_BG[cfg.group]}</div>` : "");
       return `<article class="btile ${cfg.span} reveal" style="--tile-accent:${cfg.accent};--d:${i * 45}ms">
         ${bg}
         <div class="btile__head"><h3>${esc(g.group)}</h3><span class="btile__n">${String(g.items.length).padStart(2, "0")}</span></div>

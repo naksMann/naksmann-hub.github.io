@@ -235,6 +235,15 @@ main, .footer{ position:relative; z-index:1; }
 .bgscan{ animation:bgscan 4.5s ease-in-out infinite; }
 .bgdrift{ animation:bgdrift 7s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce){ .bgflow,.bgpulse,.bgpulse2,.bgsweep,.bgscan,.bgdrift{ animation:none; } }
+
+/* Higgsfield image backgrounds — dark scrim keeps text legible, slow drift + hover brighten */
+.btile__bg--img{ opacity:1; -webkit-mask-image:none; mask-image:none; overflow:hidden; }
+.btile__bg--img img{ width:100%; height:100%; object-fit:cover; display:block; animation:bgken 24s ease-in-out infinite; }
+.btile__bg--img::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(15,15,18,.32) 0%, rgba(15,15,18,.66) 62%, rgba(15,15,18,.88) 100%); transition:background var(--dur) var(--ease); }
+.btile:hover .btile__bg--img{ opacity:1; transform:none; }
+.btile:hover .btile__bg--img::after{ background:linear-gradient(180deg, rgba(15,15,18,.14) 0%, rgba(15,15,18,.5) 62%, rgba(15,15,18,.8) 100%); }
+@keyframes bgken{ 0%,100%{ transform:scale(1.04) translate(0,0); } 50%{ transform:scale(1.09) translate(-1.5%,-1%); } }
+@media (prefers-reduced-motion: reduce){ .btile__bg--img img{ animation:none; } }
 @media (max-width:900px){ .bento{ grid-template-columns:repeat(2,1fr); } .btile--xl{ grid-column:span 2; grid-row:span 1; } .btile--wide{ grid-column:span 2; } .btile--tall{ grid-row:span 1; } }
 @media (max-width:560px){ .bento{ grid-template-columns:1fr; } .btile--xl,.btile--wide,.btile--tall{ grid-column:span 1; } }
 
