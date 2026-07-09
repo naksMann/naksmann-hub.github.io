@@ -14,12 +14,12 @@
 const CONFIG = {
   name: "Nakedi Tumelo Peta",
   // TODO: replace with your real email
-  email: "your.email@example.com",
+  email: "makgwatatumelo46@gmail.com",
   github: "https://github.com/naksMann",
   // TODO: paste your LinkedIn profile URL
-  linkedin: "https://www.linkedin.com/in/your-handle",
+  linkedin: "https://www.linkedin.com/in/nakedi-tumelo-peta-30045b381",
   // TODO: paste your TryHackMe profile URL
-  tryhackme: "https://tryhackme.com/p/your-handle",
+  tryhackme: "https://tryhackme.com/room/mwrcybersecvirtualintershipcapstone",
   resume: "assets/resume/Nakedi_Tumelo_Peta_CV.pdf",
   // TODO: add a photo at this path (square works best, ~600x600)
   profilePhoto: "assets/img/profile.jpg",
