@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__mcp-registry__search_mcp_registry",
+      "Read(//c/Users/Nakedi/.claude/skills/ui-ux-pro-max/**)",
+      "Bash(python scripts/search.py \"technical editorial distinctive geometric security enterprise\" --domain typography -n 5)",
+      "Bash(python scripts/search.py \"geometric technical display heading grotesk\" --domain google-fonts -n 6)",
+      "WebSearch"
+    ]
+  }
+}

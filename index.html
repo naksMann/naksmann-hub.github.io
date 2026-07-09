@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nakedi Tumelo Peta — Offensive &amp; Defensive Security (SOC · Pentest · ICS/OT)</title>
+  <meta name="description" content="Nakedi Tumelo Peta — final-year Computer Systems Engineering student and Cybersecurity Intern. Web-app penetration testing, SOC detection engineering, ICS/OT security, and ML for security." />
+  <meta name="author" content="Nakedi Tumelo Peta" />
+  <meta property="og:title" content="Nakedi Tumelo Peta — Cybersecurity Portfolio" />
+  <meta property="og:description" content="I break web apps and build the detections that catch the break-in. SOC · Pentest · ICS/OT · ML for security." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a0a0b'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' font-weight='700' fill='%23d4af37' text-anchor='middle'%3ENP%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css?v=3" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Living network-telemetry background (animated, faint, behind everything) -->
+  <canvas id="netbg" aria-hidden="true"></canvas>
+
+  <!-- ===== SVG icon sprite (no emoji anywhere) ===== -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.36-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.35 9.35 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C20.4 8.65 22 10.8 22 14.3V21h-4v-6c0-1.43-.03-3.27-2-3.27-2 0-2.3 1.56-2.3 3.17V21H9z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/></symbol>
+    <symbol id="i-video" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m23 7-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></symbol>
+    <symbol id="i-cert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.5 13.5 17 22l-5-3-5 3 1.5-8.5"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z"/></symbol>
+  </svg>
+
+  <!-- ===== Nav ===== -->
+  <header class="nav" id="nav">
+    <a class="nav__brand" href="#top" aria-label="Nakedi Tumelo Peta — home">
+      <span class="nav__mark">NP</span>
+      <span>Nakedi&nbsp;Peta<small>SOC · PENTEST · ICS/OT</small></span>
+    </a>
+    <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+      <svg><use href="#i-menu"/></svg>
+    </button>
+    <nav class="nav__links" id="navLinks" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Work</a>
+      <a href="#certs">Certifications</a>
+      <a href="#contact">Contact</a>
+      <a class="btn btn--primary btn--sm nav__cta" id="navResume" href="#" target="_blank" rel="noopener">
+        <svg><use href="#i-download"/></svg> CV
+      </a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <span id="top"></span>
+
+    <!-- ===== Hero ===== -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero__grid">
+          <div class="hero__copy">
+            <p class="hero__tag reveal"><span class="bar"></span> Cybersecurity Intern — 4IR Lab, South Africa</p>
+            <h1 class="hero__title reveal">Nakedi&nbsp;Tumelo<br /><span class="accent">Peta</span></h1>
+            <p class="hero__lead reveal">I break web apps — and build the detections that catch the break-in. Final-year Computer Systems Engineering student working across <strong>SOC operations, penetration testing, and ICS/OT security</strong>.</p>
+            <div class="hero__proof reveal">
+              <div>▹ <b>5 flags</b> captured — file upload → <span class="red">RCE at CVSS 8.8</span></div>
+              <div>▹ <b>~2,610</b> real attacks mapped from one Azure honeypot</div>
+              <div>▹ custom <b>KQL / Sigma</b> detections wired to human-gated <b>SOAR</b></div>
+            </div>
+            <div class="hero__actions reveal">
+              <a class="btn btn--primary" href="#projects">See the work <svg><use href="#i-arrow"/></svg></a>
+              <a class="btn btn--ghost" id="heroResume" href="#" target="_blank" rel="noopener"><svg><use href="#i-download"/></svg> CV</a>
+            </div>
+          </div>
+          <div class="hero__art reveal" style="--d:120ms">
+            <div class="terminal" role="img" aria-label="Simulated SOC console showing a KQL query over honeypot failed-logon data (Koper, Slovenia — 2,610 attempts) and a suspicious-PowerShell detection awaiting analyst approval.">
+              <div class="terminal__bar">
+                <span class="terminal__dot r"></span><span class="terminal__dot y"></span><span class="terminal__dot g"></span>
+                <span class="terminal__title">sentinel — analyst-console</span>
+              </div>
+              <div class="terminal__body" aria-hidden="true"><span class="l"><span class="kw">SecurityEvent</span> | <span class="kw">where</span> EventID == <span class="num">4625</span></span>
+<span class="l">| <span class="kw">evaluate</span> ipv4_lookup(GeoIPDB, IpAddress)</span>
+<span class="l">| <span class="kw">summarize</span> Fails=count() <span class="kw">by</span> city, country</span>
+<span class="l"> </span>
+<span class="l">  <span class="hot">──</span> Koper · Slovenia ......... <span class="num">2,610</span></span>
+<span class="l">  <span class="hot">──</span> Zagreb · Croatia ........... <span class="num">708</span></span>
+<span class="l">  <span class="hot">──</span> United States ................ <span class="num">4</span></span>
+<span class="l"> </span>
+<span class="l"><span class="hot">[alert]</span> T2_Suspicious_PowerShell  (<span class="num">-enc</span>)</span>
+<span class="l">   └─ SOAR: <span class="ok">awaiting analyst approval…</span></span>
+<span class="l">analyst@soc:~$ <span class="cursor" aria-hidden="true"></span></span></div>
+              <div class="terminal__foot"><span class="live">live telemetry</span><span>EventID 4625 · GeoIP · KQL</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== About ===== -->
+    <section class="section section--alt" id="about">
+      <div class="container">
+        <div class="about__grid">
+          <aside class="about__aside reveal">
+            <div class="about__monogram">
+              <img id="aboutPhoto" alt="Nakedi Tumelo Peta" style="display:none" />
+              <div class="mono-mark" id="monoMark">NP</div>
+              <div class="about__scan"></div>
+            </div>
+            <dl class="about__facts">
+              <div class="about__fact"><dt>Role</dt><dd>Cybersecurity Intern · 4IR Lab</dd></div>
+              <div class="about__fact"><dt>Based in</dt><dd>Centurion, South Africa</dd></div>
+              <div class="about__fact"><dt>Focus</dt><dd>SOC · Pentest · ICS/OT</dd></div>
+              <div class="about__fact"><dt>Graduating</dt><dd>2026 · TUT</dd></div>
+            </dl>
+          </aside>
+          <div class="about__body"> 
+            <p class="eyebrow reveal"><span class="idx">01</span> — About</p> 
+            <h2 class="reveal">Defensive depth. Offensive precision.</h2> 
+
+            <p class="reveal"> 
+              I'm a final-year <strong>Computer Systems Engineering</strong> student at 
+              <strong>Tshwane University of Technology</strong> (Soshanguve South, 2022–2026) 
+              and a <strong>Cybersecurity Intern at the 4IR Lab</strong> in Soshanguve. 
+              My work sits at the intersection of <strong>Security Operations (SOC)</strong>, 
+              <strong>offensive security</strong>, and <strong>security engineering</strong>, 
+              where I design, build, and validate security solutions from the ground up. 
+            </p> 
+
+            <p class="reveal"> I learn by building realistic environments and validating them against 
+              real-world threats. In Microsoft Azure, I deployed and intentionally exposed 
+              a Windows virtual machine to the public internet to study adversary behavior, 
+              capturing <strong>more than 2,600 brute-force attempts from a single source</strong> 
+              within hours. I transformed those observations into actionable detections by 
+              developing custom <strong>Kusto Query Language (KQL)</strong> analytics, 
+              writing <strong>Sigma detection rules</strong>, and implementing 
+              <strong>SOAR automation</strong> with human approval workflows to balance 
+              speed with operational control. 
+            </p> 
+
+            <p class="reveal"> 
+              On the offensive side, I perform black-box penetration testing to identify, 
+              validate, and demonstrate exploitable weaknesses. My projects include 
+              chaining unrestricted file upload vulnerabilities into 
+              <strong>remote code execution (RCE)</strong>, assessing web applications, 
+              and documenting practical remediation strategies that improve an 
+              organization's security posture. 
+            </p> 
+
+            <p class="reveal"> 
+              My goal is to contribute to high-performing security teams where I can 
+              combine offensive testing, threat detection, incident response, and cloud 
+              security engineering to help organizations anticipate, detect, and respond 
+              to evolving cyber threats. I am currently pursuing graduate opportunities 
+              in <strong>Penetration Testing</strong>, <strong>Security Operations (SOC)</strong>, 
+              <strong>Detection Engineering</strong>, and <strong>ICS/OT Cybersecurity</strong>. 
+            </p> 
+
+            <p class="about__signoff reveal"> 
+              <span class="accent">$</span> whoami → Security engineer. Penetration tester. 
+              Detection engineer. Always building, always learning. 
+            </p> 
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Skills (bento) ===== -->
+    <section class="section section--tight" id="skills">
+      <div class="container">
+        <div class="sec-head reveal">
+          <p class="eyebrow"><span class="idx">02</span> — Capabilities</p>
+          <h2 class="section-title">Skills &amp; tooling</h2>
+          <p class="section-intro">The stack I actually work in — SIEM query languages, detection engineering, offensive tooling, ML libraries, and embedded development.</p>
+        </div>
+        <div class="bento" id="skillsGrid"></div>
+      </div>
+    </section>
+
+    <!-- ===== Projects ===== -->
+    <section class="section section--alt" id="projects">
+      <div class="container">
+        <div class="sec-head reveal">
+          <p class="eyebrow"><span class="idx">03</span> — Selected work</p>
+          <h2 class="section-title">Ten projects. Real findings.</h2>
+          <p class="section-intro">Flagship engagements are shown in full with the actual artifact. Filter by discipline; open any card for the write-up, metrics, report, and demo.</p>
+        </div>
+        <div class="feature-rows" id="projectFeatured"></div>
+        <p class="eyebrow reveal" style="margin-bottom:var(--sp-6)"><span class="idx">03.b</span> — More work</p>
+        <div class="filter-bar" id="filterBar" role="group" aria-label="Filter projects by category"></div>
+        <div class="pgrid" id="projectGrid"></div>
+      </div>
+    </section>
+
+    <!-- ===== Certifications (scroll timeline) ===== -->
+    <section class="section section--flush" id="certs">
+      <div class="container" style="position:relative;z-index:1">
+        <div class="sec-head reveal">
+          <p class="eyebrow"><span class="idx">04</span> — Credentials</p>
+          <h2 class="section-title">Certifications</h2>
+          <p class="section-intro">Industry programmes, virtual internships, and cyber-security courses — certificates linked where available.</p>
+        </div>
+        <div class="timeline">
+          <div class="timeline__spine"><div class="timeline__fill" id="tlFill"></div></div>
+          <div id="certRows"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section class="section section--alt" id="contact">
+      <div class="container">
+        <div class="contact__grid">
+          <div>
+            <p class="eyebrow reveal"><span class="idx">05</span> — Contact</p>
+            <h2 class="contact__title reveal">Let's talk about <span class="accent">breaking</span> and <span class="accent">defending</span> things.</h2>
+            <p class="contact__intro reveal">Open to graduate and internship roles in penetration testing, SOC operations, and ICS/OT security. Email is the fastest way to reach me.</p>
+            <p class="contact__prompt reveal"><span class="accent">$</span> ping nakedi --role "SOC · pentest · ICS/OT" --status <span style="color:var(--gold-soft)">open</span></p>
+            <div class="contact__actions reveal">
+              <a class="btn btn--primary" id="contactEmail" href="#"><svg><use href="#i-mail"/></svg> Email me</a>
+              <button class="btn btn--ghost" id="copyEmail" type="button"><svg><use href="#i-copy"/></svg> <span id="copyEmailText">Copy address</span></button>
+              <a class="btn btn--ghost" id="contactResume" href="#" target="_blank" rel="noopener"><svg><use href="#i-download"/></svg> CV</a>
+            </div>
+          </div>
+          <div class="contact__card reveal" style="--d:100ms">
+            <h4>Find me</h4>
+            <div class="social-row" id="socialRow"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© <span id="year"></span> Nakedi Tumelo Peta — built by hand with a black · <span style="color:var(--gold)">gold</span> · <span style="color:var(--red-bright)">red</span> system.</p>
+      <p class="mono">Soshanguve · Centurion · South Africa</p>
+    </div>
+  </footer>
+
+  <!-- ===== Project detail modal ===== -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal__scrim" data-close></div>
+    <div class="modal__dialog">
+      <div class="modal__panel" id="modalPanel"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"><svg><use href="#i-check"/></svg> <span id="toastMsg">Copied</span></div>
+
+  <script src="js/data.js?v=2"></script>
+  <script src="js/main.js?v=2"></script>
+</body>
+</html>
