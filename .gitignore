@@ -1,5 +1,5 @@
 # Local tool config (per-machine, not project content)
-.claude/settings.local.json
+.claude/
 
 # OS junk
 .DS_Store
