@@ -329,7 +329,7 @@ const PROJECTS = [
     tools: ["Microsoft Azure", "Sentinel", "Log Analytics", "Azure Monitor Agent", "KQL", "GeoIP Watchlist"],
     reports: [{ label: "Honeypot Report", href: "assets/reports/07-honeypot.pdf" }],
     github: "https://github.com/naksMann/honeypot-threat-analysis",
-    videoEmbed: "", // TODO: paste YouTube/Vimeo EMBED url (e.g. https://www.youtube.com/embed/XXXX)
+    videoEmbed: "https://www.youtube.com/embed/Z07DxozD9tM",
   },
   {
     id: "insider-threat",
@@ -354,7 +354,7 @@ const PROJECTS = [
     tools: ["Wazuh", "Docker", "Isolation Forest", "Syscheck FIM", "Python", "scikit-learn"],
     reports: [{ label: "Insider Threat Report", href: "assets/reports/08-insider-threat.pdf" }],
     github: "https://github.com/naksMann/soc-insider-threat-detection",
-    videoEmbed: "", // TODO: paste YouTube/Vimeo EMBED url
+    videoEmbed: "https://www.youtube.com/embed/WY-QnTTFSOU",
   },
   {
     id: "facial-recognition",
@@ -379,7 +379,7 @@ const PROJECTS = [
     tools: ["face-api.js", "Python Flask", "face_recognition", "Firebase", "ESP32", "JavaScript"],
     reports: [{ label: "Technical Documentation", href: "assets/reports/09-facial-recognition.pdf" }],
     github: "https://github.com/naksMann/facial-recognition-access-control",
-    videoEmbed: "", // TODO: paste YouTube/Vimeo EMBED url
+    videoEmbed: "https://www.youtube.com/embed/OAYKzZmYNtQ",
   },
   {
     id: "mwr-pentest",

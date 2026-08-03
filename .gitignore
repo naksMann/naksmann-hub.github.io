@@ -1,0 +1,10 @@
+# Local tool config (per-machine, not project content)
+.claude/settings.local.json
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
