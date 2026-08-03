@@ -415,7 +415,7 @@ const PROJECTS = [
     ],
     tools: ["Burp Suite", "John the Ripper", "CyberChef", "PyJWT", "Python"],
     reports: [{ label: "Full Pen-Test Report (55 pp)", href: "assets/reports/10-mwr-pentest.pdf" }],
-    github: "",
+    github: "https://github.com/naksMann/mwr-pentest-capstone",
     videoEmbed: "",
   },
   {
@@ -455,7 +455,7 @@ const PROJECTS = [
     ],
     tools: ["Nmap", "Metasploit", "plcscan.py", "searchsploit", "netdiscover"],
     reports: [{ label: "Full ICS/OT Pen-Test Report (17 pp)", href: "assets/reports/11-plc-pentest.pdf" }],
-    github: "",
+    github: "https://github.com/naksMann/plc-ics-ot-pentest",
     videoEmbed: "",
   },
 ];
