@@ -1,97 +1,58 @@
-# Nakedi Tumelo Peta — Cybersecurity Portfolio
+# Nakedi Tumelo Peta — Cyber Security Portfolio
 
-A fast, responsive, single-page portfolio showcasing 11 SOC / penetration-testing /
-ML-for-security / embedded projects. Built as static **HTML + CSS + vanilla JS** —
-no build step, deploys anywhere.
+Portfolio site for **Nakedi Tumelo Peta**, Junior Cybersecurity Analyst.
+SOC monitoring, incident response, penetration testing and ICS/OT security.
 
-Design system: near-black ink · refined **gold** (primary) · deep **red** (severity/threat)
-accents — an enterprise SOC-analyst look, not a neon "hacker" cliché. Type is
-**Space Grotesk** (headings) / **IBM Plex Sans** (body) / **IBM Plex Mono** (terminals & data).
-Layout varies per section by intent — an asymmetric hero with a live SOC console, a **bento**
-skills grid, **alternating flagship rows + reveal-on-hover cards** for projects (using real
-report-page thumbnails), and a **scroll-driven timeline** for certifications. A faint
-network-graph motif and a single blinking terminal cursor are the security signatures.
-Fully accessible (keyboard nav, focus rings, `prefers-reduced-motion`, AA contrast) and mobile-first.
+**Live:** https://naksmann.github.io/naksmann-hub.github.io/
 
-Live at: https://naksmann-hub.github.io
+## Pages
 
----
+| Page | Contents |
+|---|---|
+| `index.html` | Hero, with rotating specialisms and social links |
+| `about.html` | Background and grouped skills |
+| `projects.html` | Six engagements, each opening a modal with its report and video |
+| `certifications.html` | Five earned certificates plus Security+ and CCNA in progress |
+| `contact.html` | Contact details and message form |
 
-## Quick start (preview locally)
+## Stack
 
-From this folder:
-
-```bash
-python -m http.server 5500
-```
-
-Then open <http://localhost:5500>. (Any static server works — you can also just open
-`index.html`, though a server is recommended so the PDF links resolve cleanly.)
-
----
-
-## Current status
-
-- **All 11 project reports** — real PDFs in `assets/reports/`, linked from each project modal.
-- **All active certifications** have a linked PDF in `assets/certs/` (MWR, EC-Council,
-  Deloitte, SANCS ×2, IT Varsity, WeThinkCode_). **CompTIA Security+** is genuinely
-  in progress (`status: "progress"` in `data.js`) — no PDF until it's earned.
-- **Demo videos** for the three lab-recording projects (honeypot, insider threat,
-  facial recognition) are wired to their public YouTube walkthroughs.
-- Three of the projects also have their own standalone GitHub repos, linked via
-  each card's **Code** button:
-  [honeypot-threat-analysis](https://github.com/naksMann/honeypot-threat-analysis),
-  [soc-insider-threat-detection](https://github.com/naksMann/soc-insider-threat-detection),
-  [facial-recognition-access-control](https://github.com/naksMann/facial-recognition-access-control).
-- Project figures (accuracy, AUC, CVSS scores, attack counts, etc.) were pulled from the
-  actual source reports, not just summaries.
-
----
+Static HTML, CSS and vanilla JavaScript. No build step, no framework, no
+package manager. GSAP (CDN) drives the intro animation; icons are inline SVG
+drawn by `renderIcons()` in `assets/js/main.js`.
 
 ## Editing content
 
-Everything renders from **`js/data.js`**:
+Content is data-driven, so the HTML rarely needs touching:
 
-- `PROFILE` / `CONFIG` — identity, links, résumé path.
-- `SKILLS` — grouped skill badges.
-- `PROJECTS` — the 11 project cards + modal detail (metrics, overview bullets, tools, report links, GitHub, video).
-- `CERTS` — certification cards.
+- **Projects** — `assets/js/projects.js`. Each entry has `title`, `subtitle`,
+  `img`, `blurb`, `tags`, `body`, `docs` and `video`.
+- **Certifications** — `assets/js/certs.js`. Set `status` to `"done"` with a
+  `file` path, or `"progress"` with an empty `file`.
+- **Rotating hero text** — `TYPED_PHRASES` near the top of the typed block in
+  `assets/js/main.js`.
 
-Change text there and reload — no compilation needed.
+## Contact form
 
----
+GitHub Pages serves static files and cannot send mail, so the form posts to
+[Web3Forms](https://web3forms.com).
 
-## File structure
+To enable delivery, replace `PASTE_YOUR_WEB3FORMS_ACCESS_KEY_HERE` in
+`contact.html` with a real access key. Until then the form falls back to
+opening the visitor's email client, so it is never dead.
 
-```
-index.html            # markup + inline SVG icon sprite (no emoji)
-css/styles.css        # design tokens + all components
-js/data.js             # ← ALL content lives here (edit this)
-js/main.js             # rendering, filtering, modal, nav, scroll reveals
-assets/
-  reports/            # 11 project report PDFs (real)
-  certs/              # certificate PDFs (real)
-  resume/             # your CV (real, replaceable)
-  img/
-    profile.jpg       # profile photo
-    reports/          # page-1 thumbnails auto-rendered from each report PDF
+## Local preview
+
+```bash
+python -m http.server 5601
 ```
 
-**Regenerating the report thumbnails** (only if you replace a report PDF): the card/hover
-images in `assets/img/reports/*.png` were rendered from page 1 of each report with PyMuPDF —
-`pip install PyMuPDF`, then render `doc[0].get_pixmap(matrix=fitz.Matrix(1.5,1.5)).save(...)`
-for the changed report.
+Then open http://localhost:5601.
 
----
+## Layout notes
 
-## Deploy
-
-**GitHub Pages** — push this folder to a repo, then Settings → Pages → deploy from
-`main` / root. (Repo is well under limits now that videos are external.)
-
-**Netlify / Vercel / Cloudflare Pages** — drag-and-drop the folder or connect the repo;
-no build command, publish directory = root.
-
----
-
-*Built with the `ui-ux-pro-max` design-intelligence skill.*
+- Paths are relative throughout, so the site works both at a domain root and
+  under a project subpath.
+- `.nojekyll` stops GitHub running the files through Jekyll.
+- Breakpoint is 768px: the mobile block is `max-width: 767.98px` so the two
+  do not both apply at exactly 768px.

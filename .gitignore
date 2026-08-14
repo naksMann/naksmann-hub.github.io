@@ -1,10 +1,9 @@
-# Local tool config (per-machine, not project content)
+# Editor / tooling
 .claude/
-
-# OS junk
-.DS_Store
-Thumbs.db
-
-# Editors
 .vscode/
 .idea/
+
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
