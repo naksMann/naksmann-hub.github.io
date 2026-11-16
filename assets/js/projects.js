@@ -50,51 +50,20 @@ const PROJECTS = [
   {
     id: "penetration-testing",
     title: "Penetration Testing",
-    subtitle: "MWR CyberSec Black-Box Web Assessment",
+    subtitle: "Web Application Assessments & Security Challenge",
     img: "assets/img/penetration-testing.jpg",
-    blurb: "Black-box assessment of a live web application: 12 findings, 5 flags, and a file upload chained into remote code execution.",
-    tags: ["OWASP Top 10", "CVSS v3.1", "Burp Suite", "John the Ripper"],
+    blurb: "Two MWR CyberSec web app tests and an Orange Cyberdefense challenge: RCE, SQL injection, forged admin tokens and free currency.",
+    tags: ["OWASP Top 10", "CVSS v3.1", "Burp Suite", "JWT Attacks", "SQL Injection", "CyberChef"],
     body: [
-      "A full black-box penetration test against a deliberately vulnerable React and Vite application served by Nginx on Ubuntu, carried out for the MWR CyberSec virtual internship.",
-      "Twelve findings (F-01 to F-12) were documented with CVSS v3.1 scoring and mapped to the OWASP Top 10. Five flags were captured across SQL injection, stored XSS, an unrestricted file upload chained into remote code execution (CVSS 8.8, High), JWT forgery through an HS256 secret cracked with John the Ripper in under a second, and a business logic flaw.",
-      "The report is written for two audiences at once: an executive summary for non-technical readers, and full reproduction steps for whoever has to fix it."
+      "Three web security engagements, each with its own report. Use the tabs below to switch between them.",
+      "MWR CyberSec applicant portal. A full black-box test against a deliberately vulnerable React and Vite application served by Nginx on Ubuntu. Twelve findings (F-01 to F-12) were scored with CVSS v3.1 and mapped to the OWASP Top 10. Five flags were captured across SQL injection, stored XSS, an unrestricted file upload chained into remote code execution (CVSS 8.8, High), JWT forgery through an HS256 secret cracked with John the Ripper in under a second, and a business logic flaw.",
+      "Imgurr marketplace (MWR report v2.0). An image marketplace with an internal currency, reviews and gift vouchers. Ten findings (five High, four Medium, one Informational) and four flags. A UNION-based SQL injection in the login email parameter read the whole SQLite database, administrator hash included. The token verifier accepted alg:none, so an unsigned JWT with is_admin set to true opened the admin dashboard. The voucher flow checked card format but never took payment, so a card number of all zeros minted 100,000 MWR-Bucks.",
+      "Orange Cyberdefense Academy challenge. A level-based web security challenge solved from level 0 to level 7: DNS A and TXT record enumeration, secrets hardcoded or encoded in client-side JavaScript, a CryptoJS AES passphrase hidden in a Sudoku and found by testing every digit order in the console, and a next-level URL recovered from an inverted QR code with ImageMagick and zbarimg. The lesson running through it is that hiding something is not securing it."
     ],
     docs: [
-      { label: "MWR Pen-Test Report", file: "assets/reports/10-mwr-pentest.pdf" }
-    ],
-    video: ""
-  },
-  {
-    id: "imgurr-pentest",
-    title: "Web App Pen-Test: Imgurr",
-    subtitle: "MWR CyberSec Assessment, Report v2.0",
-    img: "assets/img/imgurr-pentest.jpg",
-    blurb: "One ordinary account was enough to dump the database, forge an admin token and mint 100,000 in-app currency for free.",
-    tags: ["SQL Injection", "JWT alg:none", "Business Logic", "Burp Suite"],
-    body: [
-      "A second MWR CyberSec engagement, this time against Imgurr, an image marketplace where users buy and sell images with an internal currency, leave reviews and purchase gift vouchers. Testing was manual and feature by feature, with Burp Suite, curl and the browser developer tools, including pulling apart the lazy-loaded JavaScript bundle to map API endpoints the interface never showed.",
-      "Ten findings were reported: five High, four Medium and one Informational, with four flags captured. A UNION-based SQL injection in the login email parameter read the whole SQLite database, administrator hash included. The token verifier accepted alg:none, so an unsigned JWT with is_admin set to true opened the admin dashboard. The voucher flow checked card format but never took payment, so a card number of all zeros minted 100,000 MWR-Bucks that were then spent on images.",
-      "The report also records the controls that held, such as atomic voucher redemption and correctly encoded comment fields, and closes with a prioritised fix order: token validation first, then parameterised queries, real payment validation, output encoding and HTTPS."
-    ],
-    docs: [
-      { label: "Imgurr Pen-Test Report", file: "assets/reports/12-mwr-pentest-imgurr.pdf" }
-    ],
-    video: ""
-  },
-  {
-    id: "orange-challenge",
-    title: "Orange Cyberdefense Challenge",
-    subtitle: "Web Security CTF, Levels 0 to 7",
-    img: "assets/img/orange-challenge.jpg",
-    blurb: "Eight levels of client-side security, each beaten by reading what the browser was sent rather than what it showed.",
-    tags: ["Web Recon", "DNS Enumeration", "CryptoJS AES", "CyberChef"],
-    body: [
-      "A level-based web security challenge from the Orange Cyberdefense Academy, solved from level 0 through level 7 and written up level by level with the method, the reasoning and the evidence for each.",
-      "The levels covered DNS A and TXT record enumeration, passwords hardcoded or base64-encoded in client-side JavaScript, a password assembled from base64, ASCII character codes and string slicing, an MD5 check used only as a verifier, a CryptoJS AES string whose passphrase was hidden in a Sudoku (found by brute forcing the digit order in the console), and a next-level URL inside an inverted QR code recovered with ImageMagick and zbarimg.",
-      "The common thread is that hiding something is not securing it. Every control ran in the browser, so every control could be read and undone. The report argues for moving checks and secrets to the server, where the user never sees them."
-    ],
-    docs: [
-      { label: "Challenge Report", file: "assets/reports/13-orange-challenge.pdf" }
+      { label: "MWR Pen-Test Report", file: "assets/reports/10-mwr-pentest.pdf" },
+      { label: "Imgurr Pen-Test Report", file: "assets/reports/12-mwr-pentest-imgurr.pdf" },
+      { label: "Orange Cyberdefense Challenge", file: "assets/reports/13-orange-challenge.pdf" }
     ],
     video: ""
   },

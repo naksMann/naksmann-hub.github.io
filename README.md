@@ -11,7 +11,7 @@ SOC monitoring, incident response, penetration testing and ICS/OT security.
 |---|---|
 | `index.html` | Hero, with rotating specialisms and social links |
 | `about.html` | Background and grouped skills |
-| `projects.html` | Eight engagements, each opening a modal with its report and video |
+| `projects.html` | Six engagements, each opening a modal with its report and video |
 | `certifications.html` | Five earned certificates plus Security+ and CCNA in progress |
 | `contact.html` | Contact details and message form |
 
